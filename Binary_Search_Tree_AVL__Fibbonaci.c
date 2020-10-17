@@ -1,9 +1,9 @@
-// Programa C para inserir um nó na árvore AVL
+// Programa C para inserir um nÃ³ na Ã¡rvore AVL
 #include<stdio.h> 
 #include<stdlib.h> 
 #define COUNT 10
 
-// Um nó de árvore AVL  
+// Um nÃ³ de Ã¡rvore AVL  
 struct Node 
 { 
 	int key; 
@@ -13,7 +13,7 @@ struct Node
 }; 
 
 
-// Uma função para obter a altura da árvore  
+// Uma funÃ§Ã£o para obter a altura da Ã¡rvore  
 int height(struct Node *N) 
 { 
 	if (N == NULL) 
@@ -21,43 +21,43 @@ int height(struct Node *N)
 	return N->height; 
 } 
 
-// Uma função para obter um máximo de dois inteiros  
+// Uma funÃ§Ã£o para obter um mÃ¡ximo de dois inteiros  
 int max(int a, int b) 
 { 
 	return (a > b)? a : b; 
 } 
 
-//Função que atribui um novo nó com o valor inserido e NULL aos ponteiros esquerdo e direito.
+//FunÃ§Ã£o que atribui um novo nÃ³ com o valor inserido e NULL aos ponteiros esquerdo e direito.
 struct Node* newNode(int key) 
 { 
 	struct Node* node = (struct Node*) malloc(sizeof(struct Node)); 
 	node->key = key; 
 	node->left = NULL; 
 	node->right = NULL; 
-	node->height = 1; // novo nó é inicialmente adicionado na folha 
+	node->height = 1; // novo nÃ³ Ã© inicialmente adicionado na folha 
 	return(node); 
 } 
 
 
-/* Visualização das rotações:
+/* VisualizaÃ§Ã£o das rotaÃ§Ãµes:
 
-T1, T2 e T3 são sub-árvores enraizadas em y (no lado esquerdo) ou x (no lado direito)
+T1, T2 e T3 sÃ£o sub-Ã¡rvores enraizadas em y (no lado esquerdo) ou x (no lado direito)
 
      y                               x
-    / \     Rotação a direita       /  \
+    / \     RotaÃ§Ã£o a direita       /  \
    x   T3   - - - - - - - >        T1   y 
   / \       < - - - - - - -            / \
- T1  T2     Rotação a esquerda       T2  T3
+ T1  T2     RotaÃ§Ã£o a esquerda       T2  T3
  
   */ 
   
-// Função para rotação à direita da sub-árvore enraizada em y 
+// FunÃ§Ã£o para rotaÃ§Ã£o Ã  direita da sub-Ã¡rvore enraizada em y 
 struct Node *rightRotate(struct Node *y) 
 { 
 	struct Node *x = y->left; 
 	struct Node *T2 = x->right; 
 
-	// Rotação a direita 
+	// RotaÃ§Ã£o a direita 
 	x->right = y; 
 	y->left = T2; 
 
@@ -69,25 +69,25 @@ struct Node *rightRotate(struct Node *y)
 	return x; 
 } 
 
-/* Visualização das rotações:
+/* VisualizaÃ§Ã£o das rotaÃ§Ãµes:
 
-T1, T2 e T3 são sub-árvores enraizadas em y (no lado esquerdo) ou x (no lado direito)
+T1, T2 e T3 sÃ£o sub-Ã¡rvores enraizadas em y (no lado esquerdo) ou x (no lado direito)
 
      y                               x
-    / \     Rotação a direita       /  \
+    / \     RotaÃ§Ã£o a direita       /  \
    x   T3   - - - - - - - >        T1   y 
   / \       < - - - - - - -            / \
- T1  T2     Rotação a esquerda       T2  T3
+ T1  T2     RotaÃ§Ã£o a esquerda       T2  T3
  
   */ 
 
-// Função para rotação à esquerda da sub-árvore enraizada em x 
+// FunÃ§Ã£o para rotaÃ§Ã£o Ã  esquerda da sub-Ã¡rvore enraizada em x 
 struct Node *leftRotate(struct Node *x) 
 { 
 	struct Node *y = x->right; 
 	struct Node *T2 = y->left; 
 
-	// Rotação a esquerda 
+	// RotaÃ§Ã£o a esquerda 
 	y->left = x; 
 	x->right = T2; 
 
@@ -99,7 +99,7 @@ struct Node *leftRotate(struct Node *x)
 	return y; 
 } 
 
-// Obter fator de balanceamento do nó N
+// Obter fator de balanceamento do nÃ³ N
 int getBalance(struct Node *N) 
 { 
 	if (N == NULL) 
@@ -107,45 +107,45 @@ int getBalance(struct Node *N)
 	return height(N->left) - height(N->right); 
 } 
 
-// Função recursiva para inserir na sub-árvore enraizada com o nó e retorna a nova raiz da sub-árvore
+// FunÃ§Ã£o recursiva para inserir na sub-Ã¡rvore enraizada com o nÃ³ e retorna a nova raiz da sub-Ã¡rvore
 struct Node* insert(struct Node* node, int key) 
 { 
-	// 1. Realiza a inserção normal da BST
-	if (node == NULL) // se vazio, cria nova árvore
+	// 1. Realiza a inserÃ§Ã£o normal da BST
+	if (node == NULL) // se vazio, cria nova Ã¡rvore
 		return(newNode(key)); 
 
 	if (key < node->key) //se menor, insere a esquerda
 		node->left = insert(node->left, key); 
 	else if (key > node->key) // se maior,  insere a direita
 		node->right = insert(node->right, key); 
-	else // Se igual, retorna o mesmo nó
+	else // Se igual, retorna o mesmo nÃ³
 		return node; 
 
-	// 2. Atualiza a altura do nó ancestral
+	// 2. Atualiza a altura do nÃ³ ancestral
 	node->height = 1 + max(height(node->left), 
 						height(node->right)); 
 
-	// 3. Obter o fator de balanceamento do nó ancestral para verificar se este nó se tornou desequilibrado 
+	// 3. Obter o fator de balanceamento do nÃ³ ancestral para verificar se este nÃ³ se tornou desequilibrado 
 	int balance = getBalance(node); 
 
-		// Se o nó se desequilibrar, então um dos quatro casos abaixo irá ocorrer
+		// Se o nÃ³ se desequilibrar, entÃ£o um dos quatro casos abaixo irÃ¡ ocorrer
 
 
 		// Esquerda esquerda
 		/*
 	
-		T1, T2, T3 and T4 são sub-árvores
+		T1, T2, T3 and T4 sÃ£o sub-Ã¡rvores
 		
  	        z                                       y 
  	       / \                                   /     \
- 	      y   T4      Rotação a direita (z)     x       z
+ 	      y   T4      RotaÃ§Ã£o a direita (z)     x       z
 	      / \          - - - - - - - - ->      /  \    /  \ 
  	    x   T3                               T1  T2  T3  T4
  	   / \
  	 T1   T2
 	
 		*/
-	//y é filho a esquerda de z e x é filho a esquerda de y 
+	//y Ã© filho a esquerda de z e x Ã© filho a esquerda de y 
 	if (balance > 1 && key < node->left->key) 
 		return rightRotate(node); 
 
@@ -154,7 +154,7 @@ struct Node* insert(struct Node* node, int key)
 	
 		   z                                  y
          /  \                               /   \ 
-		T1   y     Rotação a esquerda(z)  z      x
+		T1   y     RotaÃ§Ã£o a esquerda(z)  z      x
  		   /  \  	- - - - - - - ->     / \    / \
  		 T2   x     	               T1  T2 T3  T4
  	 	     / \
@@ -162,7 +162,7 @@ struct Node* insert(struct Node* node, int key)
 	
 	*/ 
 	
-	//y é filho a direita de z e x é filho a direita de y 
+	//y Ã© filho a direita de z e x Ã© filho a direita de y 
 	if (balance < -1 && key > node->right->key) 
 		return leftRotate(node); 
 
@@ -172,7 +172,7 @@ struct Node* insert(struct Node* node, int key)
 	
 	     z                               z                         	 	   x
 	    / \                            /   \                            /    \ 
-	   y   T4  Rotação a esquerda(y)  x    T4  Rotação a direita(z)    y      z
+	   y   T4  RotaÃ§Ã£o a esquerda(y)  x    T4  RotaÃ§Ã£o a direita(z)    y      z
 	  / \      - - - - - - - - ->    /  \      - - - - - - - ->		  / \    / \
 	T1   x                          y    T3                    		T1  T2 T3  T4
 	    / \                        / \
@@ -180,7 +180,7 @@ struct Node* insert(struct Node* node, int key)
 	
 	*/ 
 	
-	//y é filho a esquerda de z e x é filho a direita de y
+	//y Ã© filho a esquerda de z e x Ã© filho a direita de y
 	if (balance > 1 && key > node->left->key) 
 	{ 
 		node->left = leftRotate(node->left); 
@@ -193,7 +193,7 @@ struct Node* insert(struct Node* node, int key)
 	
 	   z                             z                                    x
 	  / \                           / \                                 /   \ 
-	T1   y   Rotação a direita(y) T1   x      Rotação a esquerda(z)   z      y
+	T1   y   RotaÃ§Ã£o a direita(y) T1   x      RotaÃ§Ã£o a esquerda(z)   z      y
 	    / \  - - - - - - - - ->      /  \       - - - - - - - ->     / \    / \
 	   x   T4                       T2   y                         T1  T2  T3  T4
 	  / \                               /  \
@@ -201,18 +201,18 @@ struct Node* insert(struct Node* node, int key)
 	
 	*/
 	 
-	 //y é filho a direita de z e x é filho a esquerda de y
+	 //y Ã© filho a direita de z e x Ã© filho a esquerda de y
 	if (balance < -1 && key < node->right->key) 
 	{ 
 		node->right = rightRotate(node->right); 
 		return leftRotate(node); 
 	} 
 
-	//  retornar o ponteiro (inalterado) do nó 
+	//  retornar o ponteiro (inalterado) do nÃ³ 
 	return node; 
 } 
 
-// Uma função de utilidade para imprimir a travessia da árvore antes da solicitação
+// Uma funÃ§Ã£o de utilidade para imprimir a travessia da Ã¡rvore antes da solicitaÃ§Ã£o
 void preOrder(struct Node *root) 
 { 
 	if(root != NULL) 
@@ -223,7 +223,7 @@ void preOrder(struct Node *root)
 	} 
 } 
 
-// Função para série de Fibbonacci
+// FunÃ§Ã£o para sÃ©rie de Fibbonacci
 int fibbonacci(int n) {
    if(n == 0){
       return 0;
@@ -234,7 +234,7 @@ int fibbonacci(int n) {
    }
 }
 
-// Função para imprimir árvore binária em 2D  
+// FunÃ§Ã£o para imprimir Ã¡rvore binÃ¡ria em 2D  
 // Faz travessia inversa
 void print2DUtil(struct Node *root, int space) 
 { 
@@ -244,27 +244,27 @@ void print2DUtil(struct Node *root, int space)
 	if (root == NULL) 
 		return; 
 
-	// Aumeta distancia entre níveis
+	// Aumeta distancia entre nÃ­veis
 	space += COUNT; 
 
-	// Processar primeiro a criança a direita 
+	// Processar primeiro a crianÃ§a a direita 
 	print2DUtil(root->right, space); 
 
-	// Imprimir nó atual após espaço
+	// Imprimir nÃ³ atual apÃ³s espaÃ§o
 	// count 
 	printf("\n"); 
 	for (i = COUNT; i < space; i++) 
 		printf(" "); 
 	printf("%d\n", root->key); 
 
-	// Processar a criança a esquerda
+	// Processar a crianÃ§a a esquerda
 	print2DUtil(root->left, space); 
 } 
 
 // Wrapp print2DUtil() 
 void print2D(struct Node *root) 
 { 
-// Passar espaço inicial countar como 0 
+// Passar espaÃ§o inicial countar como 0 
 print2DUtil(root, 5); 
 }
 
