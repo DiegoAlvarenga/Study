@@ -1,3 +1,6 @@
+#Diego Correa Faria Alvarenga
+#Maquina de vendas, dá troco otimizado, atualiza dinheiro dentro da maquina
+
 .data
 
 #Quantidade de dinheiro na maquina
@@ -20,7 +23,7 @@ troco:              .word 0
 #texto
 
 bemVindoMsg:            .asciiz "Bem vindo a maquina de vendas.\n "
-valInseridoMsg:         .asciiz "\nValor Inserido at� o momento: "
+valInseridoMsg:         .asciiz "\nValor Inserido até o momento: "
 aguardandoPagamentoMsg: .asciiz "\n\nAguardando pagamento...\nDigite -1 para desistir.\n"
 trocoMsg:               .asciiz "\nTroco: R$"
 valorProdutoMsg:	.asciiz "\nValor do produto selecionado: R$"
